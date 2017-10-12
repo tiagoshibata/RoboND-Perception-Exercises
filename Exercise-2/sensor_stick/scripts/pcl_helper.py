@@ -200,6 +200,9 @@ def float_to_rgb(float_rgb):
     return color
 
 
+color_list = []
+
+
 def get_color_list(cluster_count):
     """ Returns a list of randomized colors
 
@@ -209,7 +212,7 @@ def get_color_list(cluster_count):
         Returns:
             (list): List containing 3-element color lists
     """
-    if (cluster_count > len(get_color_list.color_list)):
-        for i in xrange(len(get_color_list.color_list), cluster_count):
-            get_color_list.color_list.append(random_color_gen())
-    return get_color_list.color_list
+    if (cluster_count > len(color_list)):
+        for i in xrange(len(color_list), cluster_count):
+            color_list.append(random_color_gen())
+    return color_list
