@@ -25,7 +25,7 @@ def ransac(cloud):
     segmenter = cloud.make_segmenter()
     segmenter.set_model_type(pcl.SACMODEL_PLANE)
     segmenter.set_method_type(pcl.SAC_RANSAC)
-    segmenter.set_distance_threshold(.01)
+    segmenter.set_distance_threshold(.02)
 
     inliers, coefficients = segmenter.segment()
     return inliers, coefficients
