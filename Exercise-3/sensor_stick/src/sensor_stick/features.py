@@ -5,7 +5,7 @@ import sensor_msgs.point_cloud2 as pc2
 
 
 def rgb_to_hsv(rgb_list):
-    rgb_normalized = [rgb_list[0] / 255, rgb_list[1] / 255, rgb_list[2] / 255]
+    rgb_normalized = [1. * rgb_list[x] / 255 for x in xrange(3)]
     hsv_normalized = matplotlib.colors.rgb_to_hsv([[rgb_normalized]])[0][0]
     return hsv_normalized
 
