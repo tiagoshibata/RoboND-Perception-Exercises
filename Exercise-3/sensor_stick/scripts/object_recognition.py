@@ -105,9 +105,9 @@ def pcl_callback(pcl_msg):
         detected_objects_labels.append(label)
 
         # Publish a label into RViz
-        label_pos = list(white_cloud[pts_list[0]])
+        label_pos = list(point_cloud[pts_list[0]])
         label_pos[2] += .4
-        object_markers_pub.publish(make_label(label,label_pos, index))
+        object_markers_pub.publish(make_label(label, label_pos, index))
 
         detected_object = DetectedObject()
         detected_object.label = label
