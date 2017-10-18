@@ -87,12 +87,10 @@ def pcl_callback(pcl_msg):
     cluster_cloud = pcl.PointCloud_PointXYZRGB()
     cluster_cloud.from_list(color_cluster_point_list)
 
-    objects_message = pcl_to_ros(cluster_cloud)
-
     detected_objects_labels = []
     detected_objects = []
     for index, pts_list in enumerate(clusters):
-        pcl_cluster = cloud_objects.extract(pts_list)
+        pcl_cluster = objects_cloud.extract(pts_list)
         ros_cluster = pcl_to_ros(pcl_cluster)
 
         # Extract histogram features

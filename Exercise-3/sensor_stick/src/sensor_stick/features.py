@@ -14,7 +14,7 @@ def compute_histogram(point_list, color_range=(0, 256)):
     channel_histogram = [None] * 3
     for channel in range(3):
         channel_histogram[channel] = np.histogram(
-            (pixel[channel] for pixel in point_list),
+            [pixel[channel] for pixel in point_list],
             bins=32,
             range=color_range)
 
