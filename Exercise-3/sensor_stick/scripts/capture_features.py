@@ -2,6 +2,7 @@
 import numpy as np
 import pickle
 import rospy
+import sys
 
 from sensor_stick.pcl_helper import *
 from sensor_stick.training_helper import spawn_model
@@ -20,17 +21,54 @@ def get_normals(cloud):
     return get_normals_prox(cloud).cluster
 
 
+def get_labels(world_number):
+    if world_number == 0:
+        return [
+            'beer',
+            'bowl',
+            'create',
+            'disk_part',
+            'hammer',
+            'plastic_cup',
+            'soda_can',
+         ]
+    elif world_number == 1:
+        return [
+            'biscuits',
+            'soap',
+            'soap2',
+         ]
+    elif world_number == 2:
+        return [
+            'biscuits',
+            'soap',
+            'book',
+            'soap2',
+            'glue',
+         ]
+    elif world_number == 3:
+        return [
+            'sticky_notes',
+            'book',
+            'snacks',
+            'biscuits',
+            'eraser',
+            'soap2',
+            'soap',
+            'glue',
+         ]
+
+
 if __name__ == '__main__':
     rospy.init_node('capture_node')
 
-    models = [\
-       'beer',
-       'bowl',
-       'create',
-       'disk_part',
-       'hammer',
-       'plastic_cup',
-       'soda_can']
+    assert(len(sys.argv) <= 2)
+    if len(sys.argv) < 2:
+        world_number = 0
+    else:
+        world_number = int(sys.argv[1])
+
+    models = get_labels(world_number)
 
     # Disable gravity and delete the ground plane
     initial_setup()
@@ -62,6 +100,5 @@ if __name__ == '__main__':
             labeled_features.append([feature, model_name])
 
         delete_model()
-
 
     pickle.dump(labeled_features, open('training_set.sav', 'wb'))
