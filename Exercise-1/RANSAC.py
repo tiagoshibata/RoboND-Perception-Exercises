@@ -26,15 +26,13 @@ segmenter.set_distance_threshold(.01)
 
 # Extract inliers
 inliers, coefficients = segmenter.segment()
-outliers = cloud_filtered.extract(inliers, negative=True)
-pcl.save(outliers, 'extracted_outliers.pcd')
+inlier_points = cloud_filtered.extract(inliers)
+pcl.save(inlier_points, 'extracted_inliers.pcd')
 
 
 # Extract outliers
-# outlier_filter = cloud_filtered.make_statistical_outlier_filter()
-# outlier_filter.set_mean_k(50)
-# outlier_filter.set_std_dev_mul_thresh(1.)
-# cloud_filtered = outlier_filter.filter()
-# pcl.save(cloud_filtered, 'outlier_filtered.pcd')
+inliers, coefficients = segmenter.segment()
+outlier_points = cloud_filtered.extract(inliers, negative=True)
+pcl.save(outlier_points, 'extracted_outliers.pcd')
 
 # Save pcd for tabletop objects

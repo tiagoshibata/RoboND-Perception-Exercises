@@ -27,7 +27,6 @@ def compute_histogram(point_list, color_range=(0, 256)):
 
 
 def compute_color_histograms(cloud, using_hsv=False):
-
     # Compute histograms for the clusters
     point_colors_list = []
 
